@@ -1,16 +1,18 @@
 <template>
   <div id="app">
+    <vueCanvasNest/>
     <OperaLogo/>
   </div>
 </template>
 
 <script>
-import OperaLogo from './components/OperaLogo.vue'
+import OperaLogo from './components/OperaLogo.vue';
+import vueCanvasNest from 'vue-canvas-nest'
 
 export default {
   name: 'app',
   components: {
-    OperaLogo
+    OperaLogo,vueCanvasNest
   }
 }
 </script>
