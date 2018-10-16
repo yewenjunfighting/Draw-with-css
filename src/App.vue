@@ -1,29 +1,65 @@
 <template>
   <div id="app">
     <vueCanvasNest/>
-    <OperaLogo/>
+    <OperaLogo v-if="now === 'op'"/>
+    <Sector v-if="now === 'pie'"/>
+    <button @click="nextComponent" :disabled="status === 'end'">{{status}}</button>
   </div>
 </template>
 
 <script>
-import OperaLogo from './components/OperaLogo.vue';
+import OperaLogo from './components/OperaLogo.vue'
 import vueCanvasNest from 'vue-canvas-nest'
+import Sector  from  './components/Sector-graph.vue'
 
 export default {
   name: 'app',
   components: {
-    OperaLogo,vueCanvasNest
+    OperaLogo,vueCanvasNest,Sector
+  },
+  data: function(){
+      return{
+          now: 'op',
+          have: ['op', 'pie'],
+          status: 'next'
+      }
+  },
+  methods: {
+      nextComponent: function(){
+          console.log(this.now);
+          let index = this.have.indexOf(this.now);
+          if(index + 1=== this.have.length - 1){
+              this.now = this.have[index + 1];
+              this.status = 'end';
+          }else{
+              this.now = this.have[index + 1];
+          }
+      }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
+
+  button{
+    width: 5%;
+    padding:5px 10px ;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+  }
+
+  [disabled]{
+    cursor: default;
+  }
 </style>
