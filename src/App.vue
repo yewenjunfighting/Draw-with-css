@@ -3,7 +3,7 @@
     <vueCanvasNest/>
     <OperaLogo v-if="now === 'op'"/>
     <Sector v-if="now === 'pie'"/>
-    <button @click="nextComponent" :disabled="status === 'end'">{{status}}</button>
+    <button @click="nextComponent">{{status}}</button>
   </div>
 </template>
 
@@ -28,11 +28,12 @@ export default {
       nextComponent: function(){
           console.log(this.now);
           let index = this.have.indexOf(this.now);
-          if(index + 1=== this.have.length - 1){
+          if(this.status === 'back'){
+              this.status = 'next';
+              this.now = this.have[0];
+          }else if(index + 1=== this.have.length - 1){
               this.now = this.have[index + 1];
-              this.status = 'end';
-          }else{
-              this.now = this.have[index + 1];
+              this.status = 'back';
           }
       }
   }
@@ -57,6 +58,7 @@ export default {
     background-color: #fff;
     color: #000;
     cursor: pointer;
+    border: 1px solid #aeacac;
   }
 
   [disabled]{
