@@ -4,18 +4,60 @@
     <OperaLogo v-if="now === 'op'"/>
     <Sector v-if="now === 'pie'"/>
     <button @click="nextComponent">{{status}}</button>
+    <router-view></router-view>
+    <router-link to="/index">Go to index</router-link>
+    <router-link to="/about">Go to about</router-link>
   </div>
 </template>
 
 <script>
+import VueRouter from 'vue-router'
 import OperaLogo from './components/OperaLogo.vue'
 import vueCanvasNest from 'vue-canvas-nest'
 import Sector  from  './components/Sector-graph.vue'
+import index  from  './components/index.vue'
+import about  from  './components/about.vue'
+
+let id = {
+    render (createElement){
+        return createElement('div', this.userInfo);
+    },
+        beforeRouteUpdate: function(to, from, next){
+            this.userInfo = '' + to + from;
+            next();
+        },
+    data:function(){
+        return {
+            userInfo :'默认'
+        }
+
+    }
+}
+const routers = [
+    {
+        path: '/index',
+        component: index
+    },
+    {
+        path: '/about',
+        component: about
+    },
+    {
+        path: '/user/:id',
+        component: id
+    }
+];
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: routers
+});
 
 export default {
   name: 'app',
+  router: router,
   components: {
-    OperaLogo,vueCanvasNest,Sector
+    OperaLogo, vueCanvasNest, Sector, index, about
   },
   data: function(){
       return{
@@ -38,6 +80,7 @@ export default {
       }
   }
 }
+
 </script>
 
 <style>
