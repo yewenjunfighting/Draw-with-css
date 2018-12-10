@@ -3,7 +3,6 @@
   <a href="http://www.w3school.com.cn/css3/index.ASP"><img src="https://img.shields.io/badge/css-3.0-green.svg" /></a>
 </p>
 
-# css draw
 
 ## Project setup
 ```
