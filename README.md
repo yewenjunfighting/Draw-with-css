@@ -4,7 +4,7 @@
 </p>
 
 
-## Project setup
+## Project Setup
 ```
 npm install
 ```
